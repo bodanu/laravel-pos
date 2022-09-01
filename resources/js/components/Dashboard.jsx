@@ -21,15 +21,10 @@ function Dashboard(){
         signIn(email, password, remember)
       };
 
-    useEffect(() => {
-        axios.get('/api/products')
-        .then(resp => {
-          setProducts(resp.data.products)
-      });
-    }, [setProducts])
 
 
-    if(authenticated == null || !products){
+
+    if(authenticated == null){
         return (
             <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"100vh"}}>
                 <h3>Loading....</h3>
@@ -49,7 +44,7 @@ function Dashboard(){
         return(
             <div style={{display:"flex", flexDirection:"column"}}>
                 <h1 style={{textAlign:"center"}}>Welcome, {user.name}</h1>
-                <Cart products={products}/>
+                <Cart />
                 <hr/>
                 <button style={{fontSize:"18px", padding:"12px", cursor:"pointer", alignSelf:"center", marginTop:"150px"}} onClick={closeTerminal}>Close terminal</button>
             </div>

@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 
-function Cart(props){
-    const { products } = props;
+function Cart(){
+    const [ products, setProducts ] = useState();
     const [ order, setOrder ] = useState();
     const [ total, setTotal ] = useState(0);
+
+    useEffect(() => {
+        axios.get('/api/products')
+        .then(resp => {
+          setProducts(resp.data.products)
+      });
+    }, [setProducts])
 
     const scan = (code) =>{
         axios.post('/api/scan', {

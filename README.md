@@ -22,6 +22,21 @@ Open the project folder in a terminal
   cd [my-project]
 ```
 
+Install dependencies
+```bash
+  composer install
+```
+```bash
+  npm install
+  npm run build
+```
+Or
+
+```bash
+  yarn install
+  yarn build
+```
+
 Create a .env file in the project root folder and copy the contents from the .env.example file
 Or copy below command
 ```bash
@@ -35,11 +50,6 @@ Generate app key
 Create a "db.sqlite" file inside /database folder
 ```bash
   touch database/db.sqlite
-```
-
-Install dependencies
-```bash
-  composer install
 ```
 
 (Optional)
