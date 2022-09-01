@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'cashier@pos.com',
             'password' => bcrypt('password'),
         ]);
+        \App\Models\Order::create([
+            'user_id' => 1,
+        ]);
         \App\Models\Products::create([
             'title' => "A",
             'code' => "A",

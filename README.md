@@ -52,11 +52,6 @@ Create a "db.sqlite" file inside /database folder
   touch database/db.sqlite
 ```
 
-(Optional)
-```bash
-  npm install 
-```
-
 Populate database
 ```bash
   php artisan migrate
