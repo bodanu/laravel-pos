@@ -145,6 +145,39 @@ Adds product to the order and returns order object
 
 Removes all items from the order
 
+## Usage/Examples
+
+Use the Terminal service in your class constructors
+
+```php
+use App\Services\Terminal;
+
+    public $terminal;
+
+    public function __construct(Terminal $terminal)
+    {
+        $this->terminal = $terminal;
+        ....
+    }
+    ....
+```
+Access the available methods
+
+```php
+$this->terminal->scan(string)
+```
+Scans product code and adds to the order
+
+```php
+$this->terminal->setPricing()
+```
+Calculates order line price for each item
+
+```php
+$this->terminal->total()
+```
+Returns total price (subtotal, tax, total)
+
 
 ## Running Tests
 
@@ -155,4 +188,5 @@ To run tests, run the following commands
 ```bash
   php artisan test
 ```
+
 

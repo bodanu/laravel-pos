@@ -15,10 +15,14 @@ class CartController extends Controller
     public $order;
     public $terminal;
 
+    /**
+     * Cart/Order controller. Handles requests for the POS.
+     *
+     * @param \App\Services\Terminal
+    */
     public function __construct(Terminal $terminal)
     {
         $this->terminal = $terminal;
-
     }
 
     public function collect(){

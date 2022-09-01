@@ -94,9 +94,6 @@ class Terminal{
                             }
                         }
                         break;
-                    default:
-                        # code...
-                        break;
                 }
             }
         }
