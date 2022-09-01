@@ -1,12 +1,8 @@
-import { useEffect, useState } from "react";
-import { Sanctum, useSanctum } from "react-sanctum";
+import { useSanctum } from "react-sanctum";
 import Cart from './Cart';
-
-
 
 function Dashboard(){
     const { authenticated, user, signIn, signOut } = useSanctum();
-    const [ products, setProducts ] = useState();
 
     const closeTerminal = () => {
         signOut();
@@ -20,9 +16,6 @@ function Dashboard(){
 
         signIn(email, password, remember)
       };
-
-
-
 
     if(authenticated == null){
         return (

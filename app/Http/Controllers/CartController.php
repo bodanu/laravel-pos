@@ -25,30 +25,51 @@ class CartController extends Controller
         $this->terminal = $terminal;
     }
 
+
+    /**
+     * Collects data regarding the active order.
+     * Creates new blank order if there is none
+     *
+     * @return \Illuminate\Http\JsonResponse
+    */
     public function collect(){
         $this->order = Auth::user()->order ?? $this->createEmptyOrder();
         $this->terminal->setPricing();
-        $this->order->total = $this->terminal->total();
+        $this->order->total = $this->terminal->total;
 
         return response()->json([
                 'order' => $this->order,
             ]);
     }
 
+    /**
+     * Calculates and returns total of active order.
+     *
+     * @return \Illuminate\Http\JsonResponse
+    */
     public function total(){
         return response()->json([
-            'total' => $this->terminal->total(),
+            'total' => $this->terminal->total,
         ]);
     }
+
+    /**
+     * Scans item and adds it to active order
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+    */
 
     public function scan(Request $request){
         return $this->terminal->scan($request->code);
     }
 
+    /**
+     * Clears items from active order
+     *
+    */
     public function clear(){
-
         $this->terminal->clear();
-
     }
 
     protected function createEmptyOrder(){

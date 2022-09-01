@@ -12,6 +12,8 @@ class ArbitraryTest extends TestCase
     public function test_orders()
     {
         $user = User::first();
+        $this->actingAs($user)
+        ->post('/api/clear');
 
         $response = $this->actingAs($user)
         ->post('/api/scan', ['code' => "C"]);

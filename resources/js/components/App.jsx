@@ -1,7 +1,5 @@
-import React from 'react';
-import { useEffect, useState } from "react";
 import ReactDOM from 'react-dom';
-import { Sanctum, useSanctum } from "react-sanctum";
+import { Sanctum } from "react-sanctum";
 import Dashboard from './Dashboard';
 
 
@@ -14,17 +12,6 @@ const sanctumConfig = {
   };
 
 function App() {
-    const [users, setUsers] = useState();
-    // useEffect(() => {
-    //   axios.get('/users')
-    //   .then(response => console.log(response.data));
-    // //   axios.post('/api/auth/login', {
-    // //     email: 'cashier@pos.com',
-    // //     password: 'password'
-    // //   })
-    // //   .then(response => console.log(response.data));
-
-    // }, [])
 
     return (
         <Sanctum config={sanctumConfig}>

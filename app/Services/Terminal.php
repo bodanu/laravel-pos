@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Log;
 
 class Terminal{
 
+
+    public $total;
+
+    /**
+     * Scans Item and adds it to active order.
+     *
+     * @param string $code
+     * @return \Illuminate\Http\JsonResponse
+    */
     public function scan(string $code){
         $order = Auth::user()->order;
         $product = Products::where('code', '=', $code )->firstOrFail();
@@ -35,6 +44,12 @@ class Terminal{
         return response()->json($order);
     }
 
+    /**
+     * Calculates total of active order.
+     * Returns subtotal, tax and total
+     *
+     * @return array
+    */
     public function total() {
         // Log::info(Auth::user());
         $order = Auth::user()->order;
@@ -45,16 +60,28 @@ class Terminal{
             }
         }
         $tax = 0.1 * $total;
+        $this->total = ['subtotal' => $total, 'tax' => round($tax, 2), 'total' => round($total + $tax, 2)];
         return ['subtotal' => $total, 'tax' => round($tax, 2), 'total' => round($total + $tax, 2)];
         // return round($total + $tax, 2);
     }
 
+
+    /**
+     * Clears items in active order
+     *
+    */
     public function clear() {
         Auth::user()->order->items()->delete();
 
         return response("Success", 200);
     }
 
+
+    /**
+     * Calculates each order line item's price
+     * price * quantity - discount
+     *
+    */
     public function setPricing(){
         $order = Auth::user()->order;
         if(!empty($order)){
@@ -62,8 +89,13 @@ class Terminal{
                 $item->line_price = round(($item->price * $item->quantity) -$item->line_discount, 2);
             }
         }
+        $this->total();
     }
 
+    /**
+     * Checks if any discount can be applied to items in order
+     *
+    */
     protected function applyDiscountRules(){
         $order = Auth::user()->order;
         if(!empty($order)){
@@ -98,7 +130,4 @@ class Terminal{
             }
         }
     }
-
-
-
 }

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 function Cart(){
     const [ products, setProducts ] = useState();
     const [ order, setOrder ] = useState();
-    const [ total, setTotal ] = useState(0);
 
     useEffect(() => {
         axios.get('/api/products')
@@ -41,7 +40,7 @@ function Cart(){
         setOrder(resp.data.order)
     });
     }, [setOrder])
-    if(!order){
+    if(!order || !products){
         return <h3>Loading....</h3>
     }else{
         return(
