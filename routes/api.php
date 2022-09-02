@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DiscountsController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,17 +18,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group( function() {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    Route::get('/products', [ProductsController::class, 'index']);
+    Route::get('/collect', [CartController::class, 'collect']);
+    Route::get('/total', [CartController::class, 'total']);
+    Route::post('/scan', [CartController::class, 'scan']);
+    Route::post('/clear', [CartController::class, 'clear']);
+    Route::get('/discounts', [DiscountsController::class, 'index']);
+    Route::post('/discounts/set', [DiscountsController::class, 'setDiscount']);
 });
 
-Route::middleware('auth:sanctum')->get('/products', [ProductsController::class, 'index']);
-
-Route::middleware('auth:sanctum')->get('/collect', [CartController::class, 'collect']);
-Route::middleware('auth:sanctum')->get('/total', [CartController::class, 'total']);
-Route::middleware('auth:sanctum')->post('/scan', [CartController::class, 'scan']);
-Route::middleware('auth:sanctum')->post('/clear', [CartController::class, 'clear']);
-
+// Authentication routes
 
 Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);

@@ -6,6 +6,7 @@
 
         <title>Laravel</title>
 
+        @vite('resources/css/app.css', 'build')
     </head>
     <body class="antialiased">
         <div id="example"></div>

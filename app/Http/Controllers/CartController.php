@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Products;
-use App\Models\User;
 use App\Services\Terminal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
@@ -18,7 +15,7 @@ class CartController extends Controller
     /**
      * Cart/Order controller. Handles requests for the POS.
      *
-     * @param \App\Services\Terminal
+     * @param \App\Services\Terminal $terminal
     */
     public function __construct(Terminal $terminal)
     {
@@ -34,7 +31,7 @@ class CartController extends Controller
     */
     public function collect(){
         $this->order = Auth::user()->order ?? $this->createEmptyOrder();
-        $this->terminal->setPricing();
+        $this->terminal->calculatePrices();
         $this->order->total = $this->terminal->total;
 
         return response()->json([

@@ -6,6 +6,11 @@ use App\Models\Products;
 
 class ProductsController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+    */
     public function index(){
         return response()->json(
             [

@@ -1,5 +1,6 @@
 import { useSanctum } from "react-sanctum";
 import Cart from './Cart';
+import Discounts from './Discounts';
 
 function Dashboard(){
     const { authenticated, user, signIn, signOut } = useSanctum();
@@ -38,6 +39,8 @@ function Dashboard(){
             <div style={{display:"flex", flexDirection:"column"}}>
                 <h1 style={{textAlign:"center"}}>Welcome, {user.name}</h1>
                 <Cart />
+                <hr/>
+                <Discounts />
                 <hr/>
                 <button style={{fontSize:"18px", padding:"12px", cursor:"pointer", alignSelf:"center", marginTop:"150px"}} onClick={closeTerminal}>Close terminal</button>
             </div>
